@@ -1,1 +1,2363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avon Beauty Orders Prototype web</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #d63384;
+            --secondary: #6f42c1;
+            --accent: #20c997;
+            --gold: #d4af37;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --text: #343a40;
+            --white: #ffffff;
+            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: var(--text);
+            line-height: 1.6;
+            background-color: var(--light);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        h1, h2, h3, h4 {
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            line-height: 1.2;
+        }
+        
+        h2 {
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--gradient);
+        }
+        
+        p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--gradient);
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(214, 51, 132, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(214, 51, 132, 0.4);
+        }
+        
+        .btn-gold {
+            background: linear-gradient(135deg, var(--gold) 0%, #f7ef8a 100%);
+            color: var(--dark);
+        }
+        
+        .btn-small {
+            padding: 8px 15px;
+            font-size: 0.9rem;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .notification {
+            background: var(--gradient);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Header */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .admin-btn {
+            background: var(--accent);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-left: 20px;
+        }
+        
+        .user-btn {
+            background: var(--primary);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-left: 20px;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: var(--gradient);
+            text-align: center;
+            padding: 180px 0 120px;
+            position: relative;
+            overflow: hidden;
+            color: white;
+        }
+        
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,192C672,181,768,139,864,138.7C960,139,1056,181,1152,186.7C1248,192,1344,160,1392,144L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            color: white;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .hero .btn {
+            background: white;
+            color: var(--primary);
+            font-size: 1.1rem;
+            padding: 15px 40px;
+        }
+        
+        .hero .btn:hover {
+            background: var(--light);
+        }
+        
+        /* Auth Section */
+        .auth-section {
+            background-color: var(--white);
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .auth-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .auth-tab {
+            padding: 15px 20px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            font-weight: 500;
+            flex: 1;
+            text-align: center;
+        }
+        
+        .auth-tab.active {
+            border-bottom: 3px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .auth-form {
+            display: none;
+        }
+        
+        .auth-form.active {
+            display: block;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+        
+        .form-group input:focus, .form-group select:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .auth-footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .auth-footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        /* Admin Login Section */
+        .admin-login-section {
+            background-color: var(--light);
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .admin-login-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        
+        .admin-login-container h2 {
+            color: var(--primary);
+            margin-bottom: 30px;
+        }
+        
+        .admin-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        /* Products Section */
+        .products {
+            background-color: var(--light);
+        }
+        
+        .category-section {
+            margin-bottom: 60px;
+        }
+        
+        .category-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--primary);
+        }
+        
+        .category-icon {
+            font-size: 2rem;
+            margin-right: 15px;
+            color: var(--primary);
+        }
+        
+        .category-title {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin: 0;
+        }
+        
+        .subcategories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .subcategory-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid var(--accent);
+        }
+        
+        .subcategory-title {
+            font-size: 1.4rem;
+            color: var(--secondary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .subcategory-title i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+        
+        .subcategory-products {
+            list-style-type: none;
+        }
+        
+        .subcategory-product {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .subcategory-product:last-child {
+            border-bottom: none;
+        }
+        
+        .product-name {
+            flex: 1;
+        }
+        
+        .product-price-small {
+            font-weight: 600;
+            color: var(--primary);
+            margin-right: 15px;
+        }
+        
+        /* Makeup Magic Section */
+        .makeup-magic {
+            background-color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .makeup-magic:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.05) 0%, rgba(247, 239, 138, 0.05) 100%);
+        }
+        
+        .golden-glow {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 50px;
+            position: relative;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        .golden-glow:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--gold) 0%, #f7ef8a 100%);
+            border-radius: 15px 15px 0 0;
+        }
+        
+        .golden-glow h3 {
+            color: var(--gold);
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .golden-glow h3 i {
+            margin-right: 10px;
+        }
+        
+        .glow-description {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            color: #555;
+            font-style: italic;
+        }
+        
+        .featured-products-list {
+            list-style-type: none;
+            margin: 25px 0;
+        }
+        
+        .featured-products-list li {
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+        }
+        
+        .featured-products-list li:before {
+            content: '✨';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+        }
+        
+        .product-highlight {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        
+        .product-highlight i {
+            color: var(--gold);
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        /* Beauty Advice Section */
+        .advice {
+            background-color: var(--light);
+        }
+        
+        .advice-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .advice-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid var(--accent);
+        }
+        
+        .advice-card h3 {
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .advice-card h3 i {
+            margin-right: 10px;
+        }
+        
+        .advice-list {
+            list-style-type: none;
+        }
+        
+        .advice-list li {
+            margin-bottom: 15px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .advice-list li:before {
+            content: '✨';
+            position: absolute;
+            left: 0;
+        }
+        
+        /* Testimonials Section */
+        .testimonials {
+            background-color: var(--white);
+        }
+        
+        .testimonial-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .testimonial {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+            position: relative;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .testimonial:before {
+            content: '"';
+            font-size: 5rem;
+            color: var(--light);
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            line-height: 1;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-author {
+            font-weight: bold;
+            color: var(--primary);
+            text-align: right;
+        }
+        
+        .add-testimonial {
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        /* Contact Section */
+        .contact {
+            background: var(--gradient);
+            color: white;
+            text-align: center;
+        }
+        
+        .contact h2 {
+            color: white;
+        }
+        
+        .contact h2:after {
+            background: white;
+        }
+        
+        .contact p {
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+        
+        .contact .btn {
+            background: white;
+            color: var(--primary);
+        }
+        
+        .contact .btn:hover {
+            background: var(--light);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+        }
+        
+        /* Brochure Section */
+        .brochure-section {
+            background-color: var(--white);
+            padding: 80px 0;
+        }
+        
+        .brochure-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .brochure-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .brochure-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            border: 1px solid #f0f0f0;
+        }
+        
+        .brochure-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .brochure-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .brochure-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .brochure-info {
+            padding: 25px;
+        }
+        
+        .brochure-title {
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .brochure-date {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .brochure-description {
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        
+        .brochure-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        /* Brochure Viewer */
+        .brochure-viewer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 3000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .brochure-viewer.active {
+            display: flex;
+        }
+        
+        .viewer-container {
+            background: white;
+            border-radius: 10px;
+            width: 90%;
+            height: 90%;
+            max-width: 1200px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .viewer-header {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .viewer-content {
+            flex: 1;
+            padding: 20px;
+            overflow: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .brochure-pdf {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 5px;
+        }
+        
+        .brochure-image-full {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        
+        .close-viewer {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text);
+        }
+        
+        /* Admin Panel */
+        .admin-panel {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            height: 100vh;
+            background: white;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            overflow-y: auto;
+            transition: right 0.3s ease;
+            z-index: 2000;
+        }
+        
+        .admin-panel.active {
+            right: 0;
+        }
+        
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .admin-header h3 {
+            margin: 0;
+            color: var(--primary);
+        }
+        
+        .close-admin {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text);
+        }
+        
+        .admin-tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .admin-tab {
+            padding: 10px 15px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+        }
+        
+        .admin-tab.active {
+            border-bottom: 2px solid var(--primary);
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .admin-form {
+            margin-bottom: 25px;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        
+        /* Admin Brochure Form */
+        .brochure-form {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .file-upload {
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.3s;
+            margin-bottom: 20px;
+        }
+        
+        .file-upload:hover {
+            border-color: var(--primary);
+        }
+        
+        .file-upload i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .file-upload input {
+            display: none;
+        }
+        
+        .file-preview {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .file-preview img {
+            max-width: 200px;
+            max-height: 200px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1500;
+            display: none;
+        }
+        
+        .overlay.active {
+            display: block;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+            
+            .navbar {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                margin-top: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-links li {
+                margin: 5px 10px;
+            }
+            
+            .golden-glow {
+                padding: 25px;
+            }
+            
+            .admin-panel {
+                width: 100%;
+                right: -100%;
+            }
+            
+            .subcategories {
+                grid-template-columns: 1fr;
+            }
+            
+            .auth-container {
+                padding: 20px;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .brochure-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .brochure-actions {
+                flex-direction: column;
+            }
+            
+            .viewer-container {
+                width: 95%;
+                height: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">Avon Beauty</div>
+                <ul class="nav-links">
+                    <li><a href="#" onclick="showSection('home')">Home</a></li>
+                    <li><a href="#" onclick="showSection('products')">Products</a></li>
+                    <li><a href="#" onclick="showSection('brochure')">Brochures</a></li>
+                    <li><a href="#" onclick="showSection('login')" class="user-btn">Login/Register</a></li>
+                    <li><a href="#" onclick="showSection('admin-login')" class="admin-btn">Admin Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Home Section -->
+    <section class="hero" id="home-section">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Glow with Confidence, Grace, and Beauty</h1>
+                <p>This website is currently used for product browsing and pre-orders.Orders will be submitted once our collective total reaches R600.Delivery will take 5–7 working days after the order is placed.We appreciate your patience as we build and expand our services.</p>
+                <div class="notification">
+                    <p><i class="fas fa-info-circle"></i> <strong>Minimum Order:</strong> Please note that all orders must be at least R200 to proceed.</p>
+                </div>
+                <a href="https://wa.me/0691688804" class="btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Chat with Me on WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products-section" style="display: none;">
+        <div class="container">
+            <h2>Explore Our Beauty Range</h2>
+            <div id="categoriesContainer">
+                <!-- Categories will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Brochure Section -->
+    <section class="brochure-section" id="brochure-section" style="display: none;">
+        <div class="container">
+            <div class="brochure-container">
+                <h2>Avon Brochures</h2>
+                <p class="text-center">Browse our latest Avon brochures to discover new products and special offers</p>
+                
+                <div id="brochureList" class="brochure-grid">
+                    <!-- Brochures will be loaded dynamically -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Makeup Magic Section -->
+    <section class="makeup-magic" id="makeup-section" style="display: none;">
+        <div class="container">
+            <h2>Makeup Magic</h2>
+            
+            <div class="golden-glow">
+                <h3><i class="fas fa-crown"></i> Golden Glow Look</h3>
+                <p class="glow-description">Elevate your beauty with a radiant golden glow. This soft-glam look highlights warm tones, glossy nude lips, and bold lashes — perfect for every confident woman.</p>
+                
+                <h4>✨ Products featured:</h4>
+                <ul class="featured-products-list">
+                    <li class="product-highlight">
+                        <i class="fas fa-check-circle"></i>
+                        <span><strong>Avon True Flawless Liquid Foundation</strong> for smooth, even coverage</span>
+                    </li>
+                    <li class="product-highlight">
+                        <i class="fas fa-check-circle"></i>
+                        <span><strong>Avon Power Stay 16HR Eyeshadow Duo – Golden Nude</strong></span>
+                    </li>
+                    <li class="product-highlight">
+                        <i class="fas fa-check-circle"></i>
+                        <span><strong>Avon Ultra Volume Mascara</strong> for bold definition</span>
+                    </li>
+                    <li class="product-highlight">
+                        <i class="fas fa-check-circle"></i>
+                        <span><strong>Avon Glimmer Lip Gloss – Caramel Charm</strong></span>
+                    </li>
+                </ul>
+                
+                <a href="https://wa.me/0691688804" class="btn btn-gold" target="_blank">
+                    <i class="fas fa-shopping-bag"></i> Get the Golden Glow Look
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Beauty Advice Section -->
+    <section class="advice" id="advice-section" style="display: none;">
+        <div class="container">
+            <h2>Beauty & Grooming Advice</h2>
+            <div class="advice-grid">
+                <div class="advice-card">
+                    <h3><i class="fas fa-paint-brush"></i> How to Choose the Perfect Foundation Shade</h3>
+                    <p>Always test foundation on your jawline, not your hand. The right shade should disappear seamlessly into your natural skin tone.</p>
+                </div>
+                
+                <div class="advice-card">
+                    <h3><i class="fas fa-wind"></i> Top 3 Fragrances for All-Day Freshness</h3>
+                    <ol class="advice-list">
+                        <li><strong>Far Away Beyond</strong> – warm and lasting</li>
+                        <li><strong>Imari Seduction</strong> – elegant and bold</li>
+                        <li><strong>Avon Eve Truth</strong> – soft and feminine</li>
+                    </ol>
+                </div>
+                
+                <div class="advice-card">
+                    <h3><i class="fas fa-clock"></i> Your 5-Minute Skincare Routine</h3>
+                    <ol class="advice-list">
+                        <li>Cleanse gently</li>
+                        <li>Tone to refresh</li>
+                        <li>Moisturize deeply</li>
+                        <li>Protect with SPF</li>
+                        <li>Finish with a lip balm or gloss</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials-section" style="display: none;">
+        <div class="container">
+            <h2>What Our Customers Say</h2>
+            <div class="testimonial-container">
+                <div class="testimonial">
+                    <p class="testimonial-text">Lebohang helped me find the perfect foundation match! I've never been happier with my makeup. The Avon products are amazing quality and so affordable.</p>
+                    <p class="testimonial-author">- Sarah M.</p>
+                </div>
+                
+                <div class="testimonial">
+                    <p class="testimonial-text">The Far Away Beyond perfume is my new favorite! It lasts all day and I get so many compliments. Lebohang's service is exceptional too.</p>
+                    <p class="testimonial-author">- Thandi N.</p>
+                </div>
+                
+                <div class="add-testimonial">
+                    <p>Have you tried our products? Share your experience!</p>
+                    <a href="https://wa.me/0691688804" class="btn" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Share Your Feedback
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact-section" style="display: none;">
+        <div class="container">
+            <h2>Get in Touch</h2>
+            <p>Let's talk about your next Avon order or beauty routine!</p>
+            <div class="notification">
+                <p><i class="fas fa-shopping-cart"></i> <strong>Order Requirement:</strong> Minimum order value is R200 to proceed with your purchase.</p>
+            </div>
+            <a href="https://wa.me/0691688804" class="btn" target="_blank">
+                <i class="fab fa-whatsapp"></i> Chat with Me on 0691688804
+            </a>
+        </div>
+    </section>
+
+    <!-- Auth Section -->
+    <section class="auth-section" id="login-section" style="display: none;">
+        <div class="container">
+            <div class="auth-container">
+                <div class="auth-tabs">
+                    <div class="auth-tab active" data-tab="login">Login</div>
+                    <div class="auth-tab" data-tab="register">Register</div>
+                </div>
+                
+                <!-- Login Form -->
+                <form class="auth-form active" id="loginForm">
+                    <h3>Welcome Back</h3>
+                    <div class="form-group">
+                        <label for="loginEmail">Email Address</label>
+                        <input type="email" id="loginEmail" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">Login</button>
+                    <div class="auth-footer">
+                        <p>Don't have an account? <a href="#" class="switch-to-register">Register here</a></p>
+                    </div>
+                </form>
+                
+                <!-- Registration Form -->
+                <form class="auth-form" id="registerForm">
+                    <h3>Create Your Account</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" id="firstName" placeholder="First name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" id="lastName" placeholder="Last name" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="dob">Date of Birth</label>
+                        <input type="date" id="dob" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Physical Address</label>
+                        <input type="text" id="address" placeholder="Your full address" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" placeholder="Primary phone number" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="altPhone">Alternative Phone Number</label>
+                        <input type="tel" id="altPhone" placeholder="Alternative phone number">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" placeholder="Your email address" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" placeholder="Create a password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">Create Account</button>
+                    <div class="auth-footer">
+                        <p>Already have an account? <a href="#" class="switch-to-login">Login here</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admin Login Section -->
+    <section class="admin-login-section" id="admin-login-section" style="display: none;">
+        <div class="container">
+            <div class="admin-login-container">
+                <div class="admin-icon">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <h2>Admin Access</h2>
+                <p>Enter your admin credentials to access the management panel</p>
+                
+                <form id="adminLoginForm">
+                    <div class="form-group">
+                        <label for="adminUsername">Username</label>
+                        <input type="text" id="adminUsername" placeholder="Enter admin username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="adminPassword">Password</label>
+                        <input type="password" id="adminPassword" placeholder="Enter admin password" required>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">Login as Admin</button>
+                </form>
+                
+                <div class="auth-footer" style="margin-top: 20px;">
+                    <p><a href="#" onclick="showSection('login')">← Back to Customer Login</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>© 2025 Lebohang Malefane – Avon Representative.</p>
+            <p>Empowering beauty for everyone, one glow at a time. ✨</p>
+        </div>
+    </footer>
+
+    <!-- Brochure Viewer -->
+    <div class="brochure-viewer" id="brochureViewer">
+        <div class="viewer-container">
+            <div class="viewer-header">
+                <h3 id="viewerTitle">Brochure Viewer</h3>
+                <button class="close-viewer" id="closeViewer">&times;</button>
+            </div>
+            <div class="viewer-content">
+                <div id="viewerContent">
+                    <!-- PDF or image will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Panel -->
+    <div class="overlay" id="adminOverlay"></div>
+    <div class="admin-panel" id="adminPanel">
+        <div class="admin-header">
+            <h3>Product Manager</h3>
+            <button class="close-admin" id="closeAdmin">&times;</button>
+        </div>
+        
+        <div class="admin-tabs">
+            <div class="admin-tab active" data-tab="categories">Categories</div>
+            <div class="admin-tab" data-tab="subcategories">Subcategories</div>
+            <div class="admin-tab" data-tab="products">Products</div>
+            <div class="admin-tab" data-tab="brochures">Brochures</div>
+        </div>
+        
+        <!-- Categories Tab -->
+        <div class="admin-tab-content active" id="categoriesTab">
+            <div class="admin-form">
+                <h4>Add New Category</h4>
+                <div class="form-group">
+                    <label for="categoryName">Category Name (e.g., "Fragrance")</label>
+                    <input type="text" id="categoryName" placeholder="Enter category name">
+                </div>
+                <div class="form-group">
+                    <label for="categoryIcon">Icon (e.g., "fas fa-wind")</label>
+                    <input type="text" id="categoryIcon" placeholder="fas fa-wind">
+                    <small>Use Font Awesome icons. Example: fas fa-spa, fas fa-palette</small>
+                </div>
+                <button class="btn btn-small" id="saveCategory">Add Category</button>
+            </div>
+            
+            <div class="admin-form">
+                <h4>Your Categories</h4>
+                <div id="categoryList">
+                    <!-- Category list will be populated here -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- Subcategories Tab -->
+        <div class="admin-tab-content" id="subcategoriesTab">
+            <div class="admin-form">
+                <h4>Add New Subcategory</h4>
+                <div class="form-group">
+                    <label for="subcategoryName">Subcategory Name (e.g., "Women's Fragrance")</label>
+                    <input type="text" id="subcategoryName" placeholder="Enter subcategory name">
+                </div>
+                <div class="form-group">
+                    <label for="subcategoryParent">Under Which Category?</label>
+                    <select id="subcategoryParent">
+                        <!-- Options will be populated dynamically -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="subcategoryIcon">Icon (e.g., "fas fa-female")</label>
+                    <input type="text" id="subcategoryIcon" placeholder="fas fa-female">
+                </div>
+                <button class="btn btn-small" id="saveSubcategory">Add Subcategory</button>
+            </div>
+            
+            <div class="admin-form">
+                <h4>Your Subcategories</h4>
+                <div id="subcategoryList">
+                    <!-- Subcategory list will be populated here -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- Products Tab -->
+        <div class="admin-tab-content" id="productsTab">
+            <div class="admin-form">
+                <h4>Add New Product</h4>
+                <div class="form-group">
+                    <label for="productNameCat">Product Name</label>
+                    <input type="text" id="productNameCat" placeholder="Enter product name">
+                </div>
+                <div class="form-group">
+                    <label for="productPriceCat">Price (R)</label>
+                    <input type="text" id="productPriceCat" placeholder="Enter price (e.g., 220)">
+                </div>
+                <div class="form-group">
+                    <label for="productSubcategory">Under Which Subcategory?</label>
+                    <select id="productSubcategory">
+                        <!-- Options will be populated dynamically -->
+                    </select>
+                </div>
+                <button class="btn btn-small" id="saveCategoryProduct">Add Product</button>
+            </div>
+            
+            <div class="admin-form">
+                <h4>Your Products</h4>
+                <div id="categoryProductList">
+                    <!-- Category product list will be populated here -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- Brochures Tab -->
+        <div class="admin-tab-content" id="brochuresTab">
+            <div class="admin-form">
+                <h4>Upload New Brochure</h4>
+                <div class="form-group">
+                    <label for="brochureTitle">Brochure Title</label>
+                    <input type="text" id="brochureTitle" placeholder="Enter brochure title">
+                </div>
+                <div class="form-group">
+                    <label for="brochureDescription">Description</label>
+                    <textarea id="brochureDescription" placeholder="Enter brochure description"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Upload Brochure (PDF or Image)</label>
+                    <div class="file-upload" id="brochureUpload">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Click to upload brochure file</p>
+                        <p class="small">Supports: PDF, JPG, PNG (Max: 30MB)</p>
+                        <input type="file" id="brochureFile" accept=".pdf,.jpg,.jpeg,.png">
+                    </div>
+                    <div class="file-preview" id="filePreview"></div>
+                </div>
+                <button class="btn btn-small" id="saveBrochure">Upload Brochure</button>
+            </div>
+            
+            <div class="admin-form">
+                <h4>Current Brochures</h4>
+                <div id="brochureAdminList">
+                    <!-- Brochure list for admin will be populated here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data storage
+        let categoriesData = JSON.parse(localStorage.getItem('avonCategories')) || [
+            {
+                id: 1,
+                name: "Skincare Essentials",
+                icon: "fas fa-spa"
+            },
+            {
+                id: 2,
+                name: "Makeup Magic",
+                icon: "fas fa-palette"
+            },
+            {
+                id: 3,
+                name: "Fragrance Collection",
+                icon: "fas fa-wind"
+            },
+            {
+                id: 4,
+                name: "Self-Care & Body",
+                icon: "fas fa-heart"
+            },
+            {
+                id: 5,
+                name: "Men's Grooming",
+                icon: "fas fa-male"
+            }
+        ];
+
+        let subcategoriesData = JSON.parse(localStorage.getItem('avonSubcategories')) || [
+            {
+                id: 1,
+                name: "Face Care",
+                parentId: 1,
+                icon: "fas fa-smile"
+            },
+            {
+                id: 2,
+                name: "Body Care",
+                parentId: 1,
+                icon: "fas fa-spa"
+            },
+            {
+                id: 3,
+                name: "Eye Makeup",
+                parentId: 2,
+                icon: "fas fa-eye"
+            },
+            {
+                id: 4,
+                name: "Lip Products",
+                parentId: 2,
+                icon: "fas fa-kiss-wink-heart"
+            },
+            {
+                id: 5,
+                name: "Women's Fragrance",
+                parentId: 3,
+                icon: "fas fa-female"
+            },
+            {
+                id: 6,
+                name: "Men's Fragrance",
+                parentId: 3,
+                icon: "fas fa-male"
+            }
+        ];
+
+        let categoryProductsData = JSON.parse(localStorage.getItem('avonCategoryProducts')) || [
+            { id: 1, name: "Cleansing Gel", price: "R125", subcategoryId: 1 },
+            { id: 2, name: "Moisturizing Cream", price: "R150", subcategoryId: 1 },
+            { id: 3, name: "Body Lotion", price: "R110", subcategoryId: 2 },
+            { id: 4, name: "Body Scrub", price: "R135", subcategoryId: 2 },
+            { id: 5, name: "Mascara", price: "R95", subcategoryId: 3 },
+            { id: 6, name: "Eyeshadow Palette", price: "R180", subcategoryId: 3 },
+            { id: 7, name: "Lipstick", price: "R120", subcategoryId: 4 },
+            { id: 8, name: "Lip Gloss", price: "R90", subcategoryId: 4 },
+            { id: 9, name: "Floral Perfume", price: "R220", subcategoryId: 5 },
+            { id: 10, name: "Woody Perfume", price: "R240", subcategoryId: 5 },
+            { id: 11, name: "Men's Cologne", price: "R200", subcategoryId: 6 },
+            { id: 12, name: "Aftershave", price: "R150", subcategoryId: 6 }
+        ];
+
+        // Brochure Data Storage
+        let brochuresData = JSON.parse(localStorage.getItem('avonBrochures')) || [
+            {
+                id: 1,
+                title: "Spring 2024 Collection",
+                description: "Discover our latest spring beauty collection with new fragrances and skincare",
+                filename: "spring-2024.pdf",
+                fileType: "pdf",
+                uploadDate: "2024-08-15",
+                fileData: null
+            },
+            {
+                id: 2,
+                title: "Summer Special Offers",
+                description: "Exclusive summer discounts on makeup and body care products",
+                filename: "summer-offers.jpg",
+                fileType: "image",
+                uploadDate: "2024-07-20",
+                fileData: null
+            }
+        ];
+
+        // DOM Elements
+        const adminToggle = document.getElementById('adminToggle');
+        const adminPanel = document.getElementById('adminPanel');
+        const adminOverlay = document.getElementById('adminOverlay');
+        const closeAdmin = document.getElementById('closeAdmin');
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            renderCategories();
+            setupEventListeners();
+            populateCategoryDropdowns();
+            renderAdminLists();
+            setupAuthSystem();
+            initBrochureSystem();
+            
+            // Show home section by default
+            showSection('home');
+        });
+
+        // Section navigation
+        function showSection(sectionName) {
+            // Hide all sections
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            // Show selected section
+            document.getElementById(sectionName + '-section').style.display = 'block';
+            
+            // Special handling for admin panel
+            if (sectionName === 'admin-login') {
+                // Check if already logged in as admin
+                if (localStorage.getItem('adminLoggedIn') === 'true') {
+                    // If already logged in, show admin panel
+                    adminPanel.classList.add('active');
+                    adminOverlay.classList.add('active');
+                    showSection('home');
+                }
+            }
+        }
+
+        // Set up event listeners
+        function setupEventListeners() {
+            // Admin panel toggle
+            document.querySelector('.admin-btn').addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Check admin authentication
+                if (localStorage.getItem('adminLoggedIn') !== 'true') {
+                    showSection('admin-login');
+                    return;
+                }
+                
+                // Show admin panel if authenticated
+                adminPanel.classList.add('active');
+                adminOverlay.classList.add('active');
+            });
+
+            // Close admin panel
+            closeAdmin.addEventListener('click', closeAdminPanel);
+            adminOverlay.addEventListener('click', closeAdminPanel);
+
+            // Admin tabs
+            const adminTabs = document.querySelectorAll('.admin-tab');
+            adminTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    switchAdminTab(tabId);
+                });
+            });
+
+            // Setup admin form handlers
+            setupAdminForms();
+        }
+
+        // Switch admin tabs
+        function switchAdminTab(tabId) {
+            // Update active tab
+            const adminTabs = document.querySelectorAll('.admin-tab');
+            adminTabs.forEach(tab => {
+                if (tab.getAttribute('data-tab') === tabId) {
+                    tab.classList.add('active');
+                } else {
+                    tab.classList.remove('active');
+                }
+            });
+
+            // Update active tab content
+            const adminTabContents = document.querySelectorAll('.admin-tab-content');
+            adminTabContents.forEach(content => {
+                if (content.id === `${tabId}Tab`) {
+                    content.classList.add('active');
+                } else {
+                    content.classList.remove('active');
+                }
+            });
+        }
+
+        // Render categories with subcategories and products
+        function renderCategories() {
+            const categoriesContainer = document.getElementById('categoriesContainer');
+            if (!categoriesContainer) return;
+            
+            categoriesContainer.innerHTML = categoriesData.map(category => {
+                // Get subcategories for this category
+                const subcategories = subcategoriesData.filter(sub => sub.parentId === category.id);
+                
+                return `
+                    <div class="category-section">
+                        <div class="category-header">
+                            <div class="category-icon">
+                                <i class="${category.icon}"></i>
+                            </div>
+                            <h3 class="category-title">${category.name}</h3>
+                        </div>
+                        <div class="subcategories">
+                            ${subcategories.map(subcategory => {
+                                // Get products for this subcategory
+                                const products = categoryProductsData.filter(p => p.subcategoryId === subcategory.id);
+                                
+                                return `
+                                    <div class="subcategory-card">
+                                        <h4 class="subcategory-title">
+                                            <i class="${subcategory.icon}"></i>${subcategory.name}
+                                        </h4>
+                                        <ul class="subcategory-products">
+                                            ${products.map(product => `
+                                                <li class="subcategory-product">
+                                                    <span class="product-name">${product.name}</span>
+                                                    <span class="product-price-small">${product.price}</span>
+                                                    <button class="btn btn-small" onclick="orderProduct('${product.name}')">Order</button>
+                                                </li>
+                                            `).join('')}
+                                        </ul>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Populate category dropdowns in admin panel
+        function populateCategoryDropdowns() {
+            const subcategoryParent = document.getElementById('subcategoryParent');
+            const productSubcategory = document.getElementById('productSubcategory');
+            
+            if (!subcategoryParent || !productSubcategory) return;
+            
+            // Clear existing options
+            subcategoryParent.innerHTML = '';
+            productSubcategory.innerHTML = '';
+            
+            // Add options
+            categoriesData.forEach(category => {
+                const option = document.createElement('option');
+                option.value = category.id;
+                option.textContent = category.name;
+                subcategoryParent.appendChild(option);
+            });
+            
+            subcategoriesData.forEach(subcategory => {
+                const option = document.createElement('option');
+                option.value = subcategory.id;
+                option.textContent = subcategory.name;
+                productSubcategory.appendChild(option);
+            });
+        }
+
+        // Setup admin form handlers
+        function setupAdminForms() {
+            // Categories form
+            const saveCategoryBtn = document.getElementById('saveCategory');
+            if (saveCategoryBtn) {
+                saveCategoryBtn.addEventListener('click', saveCategory);
+            }
+            
+            // Subcategories form
+            const saveSubcategoryBtn = document.getElementById('saveSubcategory');
+            if (saveSubcategoryBtn) {
+                saveSubcategoryBtn.addEventListener('click', saveSubcategory);
+            }
+            
+            // Category products form
+            const saveCategoryProductBtn = document.getElementById('saveCategoryProduct');
+            if (saveCategoryProductBtn) {
+                saveCategoryProductBtn.addEventListener('click', saveCategoryProduct);
+            }
+        }
+
+        // Render admin lists
+        function renderAdminLists() {
+            // Categories list
+            const categoryList = document.getElementById('categoryList');
+            if (categoryList) {
+                categoryList.innerHTML = categoriesData.map(category => `
+                    <div class="product-item" style="display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid #eee;">
+                        <div>
+                            <strong>${category.name}</strong> <i class="${category.icon}"></i>
+                        </div>
+                        <div>
+                            <button class="btn btn-small" onclick="editCategory(${category.id})">Edit</button>
+                            <button class="btn btn-small" onclick="deleteCategory(${category.id})" style="background: #dc3545;">Delete</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            
+            // Subcategories list
+            const subcategoryList = document.getElementById('subcategoryList');
+            if (subcategoryList) {
+                subcategoryList.innerHTML = subcategoriesData.map(subcategory => {
+                    const parentCategory = categoriesData.find(c => c.id === subcategory.parentId);
+                    return `
+                        <div class="product-item" style="display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid #eee;">
+                            <div>
+                                <strong>${subcategory.name}</strong> <i class="${subcategory.icon}"></i> (${parentCategory ? parentCategory.name : 'Unknown'})
+                            </div>
+                            <div>
+                                <button class="btn btn-small" onclick="editSubcategory(${subcategory.id})">Edit</button>
+                                <button class="btn btn-small" onclick="deleteSubcategory(${subcategory.id})" style="background: #dc3545;">Delete</button>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+            
+            // Category products list
+            const categoryProductList = document.getElementById('categoryProductList');
+            if (categoryProductList) {
+                categoryProductList.innerHTML = categoryProductsData.map(product => {
+                    const subcategory = subcategoriesData.find(s => s.id === product.subcategoryId);
+                    return `
+                        <div class="product-item" style="display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid #eee;">
+                            <div>
+                                <strong>${product.name}</strong> - ${product.price} (${subcategory ? subcategory.name : 'Unknown'})
+                            </div>
+                            <div>
+                                <button class="btn btn-small" onclick="editCategoryProduct(${product.id})">Edit</button>
+                                <button class="btn btn-small" onclick="deleteCategoryProduct(${product.id})" style="background: #dc3545;">Delete</button>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+        }
+
+        // Close admin panel
+        function closeAdminPanel() {
+            adminPanel.classList.remove('active');
+            adminOverlay.classList.remove('active');
+        }
+
+        // Order product function
+        function orderProduct(productName) {
+            const message = `Hi Lebohang! I'd like to order: ${productName}`;
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/0691688804?text=${encodedMessage}`, '_blank');
+        }
+
+        // Setup authentication system
+        function setupAuthSystem() {
+            // Customer authentication
+            setupCustomerAuth();
+            
+            // Admin authentication
+            setupAdminAuth();
+        }
+
+        // Customer authentication
+        function setupCustomerAuth() {
+            // Tab switching
+            const authTabs = document.querySelectorAll('.auth-tab');
+            const authForms = document.querySelectorAll('.auth-form');
+            
+            authTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    
+                    // Update active tab
+                    authTabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Update active form
+                    authForms.forEach(form => {
+                        form.classList.remove('active');
+                        if (form.id === `${tabId}Form`) {
+                            form.classList.add('active');
+                        }
+                    });
+                });
+            });
+            
+            // Switch between login and register forms
+            document.querySelector('.switch-to-register')?.addEventListener('click', function(e) {
+                e.preventDefault();
+                authTabs.forEach(t => t.classList.remove('active'));
+                document.querySelector('[data-tab="register"]').classList.add('active');
+                
+                authForms.forEach(form => form.classList.remove('active'));
+                document.getElementById('registerForm').classList.add('active');
+            });
+            
+            document.querySelector('.switch-to-login')?.addEventListener('click', function(e) {
+                e.preventDefault();
+                authTabs.forEach(t => t.classList.remove('active'));
+                document.querySelector('[data-tab="login"]').classList.add('active');
+                
+                authForms.forEach(form => form.classList.remove('active'));
+                document.getElementById('loginForm').classList.add('active');
+            });
+            
+            // Registration form submission
+            document.getElementById('registerForm')?.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const firstName = document.getElementById('firstName').value;
+                const lastName = document.getElementById('lastName').value;
+                const dob = document.getElementById('dob').value;
+                const address = document.getElementById('address').value;
+                const phone = document.getElementById('phone').value;
+                const altPhone = document.getElementById('altPhone').value;
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                
+                // Validation
+                if (password !== confirmPassword) {
+                    alert('Passwords do not match!');
+                    return;
+                }
+                
+                if (password.length < 6) {
+                    alert('Password must be at least 6 characters long!');
+                    return;
+                }
+                
+                // Save user data
+                const userData = {
+                    firstName,
+                    lastName,
+                    dob,
+                    address,
+                    phone,
+                    altPhone,
+                    email,
+                    password,
+                    registrationDate: new Date().toISOString()
+                };
+                
+                // Get existing users or initialize empty array
+                const existingUsers = JSON.parse(localStorage.getItem('avonUsers')) || [];
+                
+                // Check if email already exists
+                if (existingUsers.find(user => user.email === email)) {
+                    alert('An account with this email already exists!');
+                    return;
+                }
+                
+                // Add new user
+                existingUsers.push(userData);
+                localStorage.setItem('avonUsers', JSON.stringify(existingUsers));
+                
+                alert('Registration successful! You can now login.');
+                
+                // Switch to login form
+                authTabs.forEach(t => t.classList.remove('active'));
+                document.querySelector('[data-tab="login"]').classList.add('active');
+                authForms.forEach(form => form.classList.remove('active'));
+                document.getElementById('loginForm').classList.add('active');
+                
+                // Clear form
+                this.reset();
+            });
+            
+            // Login form submission
+            document.getElementById('loginForm')?.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const email = document.getElementById('loginEmail').value;
+                const password = document.getElementById('loginPassword').value;
+                
+                const existingUsers = JSON.parse(localStorage.getItem('avonUsers')) || [];
+                const user = existingUsers.find(u => u.email === email && u.password === password);
+                
+                if (user) {
+                    // Store current user session
+                    localStorage.setItem('currentUser', JSON.stringify(user));
+                    alert(`Welcome back, ${user.firstName}!`);
+                    // Redirect to home page
+                    showSection('home');
+                } else {
+                    alert('Invalid email or password!');
+                }
+            });
+        }
+
+        // Admin authentication
+        function setupAdminAuth() {
+            // Admin login form submission
+            document.getElementById('adminLoginForm')?.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const username = document.getElementById('adminUsername').value;
+                const password = document.getElementById('adminPassword').value;
+                
+                // Default admin credentials (you should change these!)
+                const adminUsername = "lebohang";
+                const adminPassword = "avon2025";
+                
+                if (username === adminUsername && password === adminPassword) {
+                    // Set admin session
+                    localStorage.setItem('adminLoggedIn', 'true');
+                    localStorage.setItem('adminUsername', username);
+                    
+                    // Show admin panel
+                    adminPanel.classList.add('active');
+                    adminOverlay.classList.add('active');
+                    showSection('home');
+                } else {
+                    alert('Invalid admin credentials!');
+                }
+            });
+        }
+
+        // Initialize brochure system
+        function initBrochureSystem() {
+            renderBrochures();
+            setupBrochureUpload();
+            setupBrochureViewer();
+            renderAdminBrochures();
+        }
+
+        // Render brochures for customers
+        function renderBrochures() {
+            const brochureList = document.getElementById('brochureList');
+            if (!brochureList) return;
+
+            brochureList.innerHTML = brochuresData.map(brochure => `
+                <div class="brochure-card">
+                    <div class="brochure-image">
+                        ${brochure.fileType === 'pdf' ? 
+                            '<i class="fas fa-file-pdf"></i>' : 
+                            brochure.fileData ? 
+                            `<img src="${brochure.fileData}" alt="${brochure.title}">` :
+                            '<i class="fas fa-images"></i>'
+                        }
+                    </div>
+                    <div class="brochure-info">
+                        <h3 class="brochure-title">${brochure.title}</h3>
+                        <div class="brochure-date">Uploaded: ${new Date(brochure.uploadDate).toLocaleDateString()}</div>
+                        <p class="brochure-description">${brochure.description}</p>
+                        <div class="brochure-actions">
+                            <button class="btn btn-small" onclick="viewBrochure(${brochure.id})">
+                                <i class="fas fa-eye"></i> View
+                            </button>
+                            <button class="btn btn-small btn-outline" onclick="downloadBrochure(${brochure.id})">
+                                <i class="fas fa-download"></i> Download
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Setup brochure upload functionality
+        function setupBrochureUpload() {
+            const brochureUpload = document.getElementById('brochureUpload');
+            const brochureFile = document.getElementById('brochureFile');
+            const filePreview = document.getElementById('filePreview');
+
+            brochureUpload.addEventListener('click', () => {
+                brochureFile.click();
+            });
+
+            brochureFile.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    // Check file size (max 10MB)
+                    if (file.size > 30 * 1024 * 1024) {
+                        alert('File size must be less than 10MB');
+                        return;
+                    }
+
+                    // Check file type
+                    const validTypes = ['application/pdf', 'image/jpeg', 'image/jpg', 'image/png'];
+                    if (!validTypes.includes(file.type)) {
+                        alert('Please upload a PDF or image file (JPG, PNG)');
+                        return;
+                    }
+
+                    // Show preview
+                    if (file.type.startsWith('image/')) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            filePreview.innerHTML = `
+                                <img src="${e.target.result}" alt="Preview">
+                                <p>${file.name}</p>
+                            `;
+                        };
+                        reader.readAsDataURL(file);
+                    } else {
+                        filePreview.innerHTML = `
+                            <i class="fas fa-file-pdf" style="font-size: 3rem; color: var(--primary);"></i>
+                            <p>${file.name}</p>
+                        `;
+                    }
+                }
+            });
+
+            // Save brochure
+            document.getElementById('saveBrochure').addEventListener('click', saveBrochure);
+        }
+
+        // Save new brochure
+        function saveBrochure() {
+            const title = document.getElementById('brochureTitle').value.trim();
+            const description = document.getElementById('brochureDescription').value.trim();
+            const fileInput = document.getElementById('brochureFile');
+            const file = fileInput.files[0];
+
+            if (!title || !description || !file) {
+                alert('Please fill in all fields and upload a file');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const newBrochure = {
+                    id: Date.now(),
+                    title: title,
+                    description: description,
+                    filename: file.name,
+                    fileType: file.type.startsWith('image/') ? 'image' : 'pdf',
+                    uploadDate: new Date().toISOString().split('T')[0],
+                    fileData: e.target.result
+                };
+
+                brochuresData.unshift(newBrochure);
+                localStorage.setItem('avonBrochures', JSON.stringify(brochuresData));
+
+                // Reset form
+                document.getElementById('brochureTitle').value = '';
+                document.getElementById('brochureDescription').value = '';
+                document.getElementById('brochureFile').value = '';
+                document.getElementById('filePreview').innerHTML = '';
+
+                // Update displays
+                renderBrochures();
+                renderAdminBrochures();
+
+                alert('Brochure uploaded successfully!');
+            };
+
+            reader.readAsDataURL(file);
+        }
+
+        // Setup brochure viewer
+        function setupBrochureViewer() {
+            document.getElementById('closeViewer').addEventListener('click', () => {
+                document.getElementById('brochureViewer').classList.remove('active');
+            });
+        }
+
+        // View brochure
+        function viewBrochure(brochureId) {
+            const brochure = brochuresData.find(b => b.id === brochureId);
+            if (!brochure) return;
+
+            const viewer = document.getElementById('brochureViewer');
+            const viewerTitle = document.getElementById('viewerTitle');
+            const viewerContent = document.getElementById('viewerContent');
+
+            viewerTitle.textContent = brochure.title;
+
+            if (brochure.fileType === 'pdf') {
+                viewerContent.innerHTML = `
+                    <iframe class="brochure-pdf" src="${brochure.fileData}" type="application/pdf"></iframe>
+                `;
+            } else {
+                viewerContent.innerHTML = `
+                    <img class="brochure-image-full" src="${brochure.fileData}" alt="${brochure.title}">
+                `;
+            }
+
+            viewer.classList.add('active');
+        }
+
+        // Download brochure
+        function downloadBrochure(brochureId) {
+            const brochure = brochuresData.find(b => b.id === brochureId);
+            if (!brochure || !brochure.fileData) return;
+
+            const link = document.createElement('a');
+            link.href = brochure.fileData;
+            link.download = brochure.filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // Render admin brochure list
+        function renderAdminBrochures() {
+            const adminList = document.getElementById('brochureAdminList');
+            if (!adminList) return;
+
+            adminList.innerHTML = brochuresData.map(brochure => `
+                <div class="product-item" style="display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid #eee;">
+                    <div>
+                        <strong>${brochure.title}</strong> 
+                        <span style="color: #666; font-size: 0.9rem;">- ${brochure.fileType.toUpperCase()}</span>
+                        <br>
+                        <small>${brochure.uploadDate}</small>
+                    </div>
+                    <div>
+                        <button class="btn btn-small" onclick="viewBrochure(${brochure.id})">View</button>
+                        <button class="btn btn-small" onclick="deleteBrochure(${brochure.id})" style="background: #dc3545;">Delete</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Delete brochure
+        function deleteBrochure(brochureId) {
+            if (confirm('Are you sure you want to delete this brochure?')) {
+                brochuresData = brochuresData.filter(b => b.id !== brochureId);
+                localStorage.setItem('avonBrochures', JSON.stringify(brochuresData));
+                renderBrochures();
+                renderAdminBrochures();
+            }
+        }
+
+        // Admin functions (to be used in admin panel)
+        window.editCategory = function(id) {
+            const category = categoriesData.find(c => c.id === id);
+            if (category) {
+                document.getElementById('categoryName').value = category.name;
+                document.getElementById('categoryIcon').value = category.icon;
+                
+                // Store the ID for saving
+                document.getElementById('saveCategory').setAttribute('data-edit-id', id);
+            }
+        };
+        
+        window.deleteCategory = function(id) {
+            if (confirm('Are you sure you want to delete this category? This will also delete all related subcategories and products.')) {
+                categoriesData = categoriesData.filter(c => c.id !== id);
+                subcategoriesData = subcategoriesData.filter(s => s.parentId !== id);
+                // Also delete products in deleted subcategories
+                const deletedSubcategoryIds = subcategoriesData.filter(s => s.parentId === id).map(s => s.id);
+                categoryProductsData = categoryProductsData.filter(p => !deletedSubcategoryIds.includes(p.subcategoryId));
+                
+                localStorage.setItem('avonCategories', JSON.stringify(categoriesData));
+                localStorage.setItem('avonSubcategories', JSON.stringify(subcategoriesData));
+                localStorage.setItem('avonCategoryProducts', JSON.stringify(categoryProductsData));
+                
+                renderCategories();
+                populateCategoryDropdowns();
+                renderAdminLists();
+            }
+        };
+        
+        window.editSubcategory = function(id) {
+            const subcategory = subcategoriesData.find(s => s.id === id);
+            if (subcategory) {
+                document.getElementById('subcategoryName').value = subcategory.name;
+                document.getElementById('subcategoryParent').value = subcategory.parentId;
+                document.getElementById('subcategoryIcon').value = subcategory.icon;
+                
+                // Store the ID for saving
+                document.getElementById('saveSubcategory').setAttribute('data-edit-id', id);
+            }
+        };
+        
+        window.deleteSubcategory = function(id) {
+            if (confirm('Are you sure you want to delete this subcategory? This will also delete all related products.')) {
+                subcategoriesData = subcategoriesData.filter(s => s.id !== id);
+                categoryProductsData = categoryProductsData.filter(p => p.subcategoryId !== id);
+                
+                localStorage.setItem('avonSubcategories', JSON.stringify(subcategoriesData));
+                localStorage.setItem('avonCategoryProducts', JSON.stringify(categoryProductsData));
+                
+                renderCategories();
+                populateCategoryDropdowns();
+                renderAdminLists();
+            }
+        };
+        
+        window.editCategoryProduct = function(id) {
+            const product = categoryProductsData.find(p => p.id === id);
+            if (product) {
+                document.getElementById('productNameCat').value = product.name;
+                document.getElementById('productPriceCat').value = product.price.replace('R', '');
+                document.getElementById('productSubcategory').value = product.subcategoryId;
+                
+                // Store the ID for saving
+                document.getElementById('saveCategoryProduct').setAttribute('data-edit-id', id);
+            }
+        };
+        
+        window.deleteCategoryProduct = function(id) {
+            if (confirm('Are you sure you want to delete this product?')) {
+                categoryProductsData = categoryProductsData.filter(p => p.id !== id);
+                localStorage.setItem('avonCategoryProducts', JSON.stringify(categoryProductsData));
+                renderCategories();
+                renderAdminLists();
+            }
+        };
+
+        // Form submission functions
+        function saveCategory() {
+            const name = document.getElementById('categoryName').value.trim();
+            const icon = document.getElementById('categoryIcon').value.trim();
+            const editId = document.getElementById('saveCategory').getAttribute('data-edit-id');
+            
+            if (!name || !icon) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            if (editId) {
+                // Update existing category
+                const index = categoriesData.findIndex(c => c.id === parseInt(editId));
+                if (index !== -1) {
+                    categoriesData[index].name = name;
+                    categoriesData[index].icon = icon;
+                }
+                document.getElementById('saveCategory').removeAttribute('data-edit-id');
+            } else {
+                // Add new category
+                const newCategory = {
+                    id: Date.now(),
+                    name: name,
+                    icon: icon
+                };
+                categoriesData.push(newCategory);
+            }
+            
+            localStorage.setItem('avonCategories', JSON.stringify(categoriesData));
+            renderCategories();
+            populateCategoryDropdowns();
+            renderAdminLists();
+            resetCategoryForm();
+        }
+        
+        function saveSubcategory() {
+            const name = document.getElementById('subcategoryName').value.trim();
+            const parentId = parseInt(document.getElementById('subcategoryParent').value);
+            const icon = document.getElementById('subcategoryIcon').value.trim();
+            const editId = document.getElementById('saveSubcategory').getAttribute('data-edit-id');
+            
+            if (!name || !icon) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            if (editId) {
+                // Update existing subcategory
+                const index = subcategoriesData.findIndex(s => s.id === parseInt(editId));
+                if (index !== -1) {
+                    subcategoriesData[index].name = name;
+                    subcategoriesData[index].parentId = parentId;
+                    subcategoriesData[index].icon = icon;
+                }
+                document.getElementById('saveSubcategory').removeAttribute('data-edit-id');
+            } else {
+                // Add new subcategory
+                const newSubcategory = {
+                    id: Date.now(),
+                    name: name,
+                    parentId: parentId,
+                    icon: icon
+                };
+                subcategoriesData.push(newSubcategory);
+            }
+            
+            localStorage.setItem('avonSubcategories', JSON.stringify(subcategoriesData));
+            renderCategories();
+            populateCategoryDropdowns();
+            renderAdminLists();
+            resetSubcategoryForm();
+        }
+        
+        function saveCategoryProduct() {
+            const name = document.getElementById('productNameCat').value.trim();
+            const price = document.getElementById('productPriceCat').value.trim();
+            const subcategoryId = parseInt(document.getElementById('productSubcategory').value);
+            const editId = document.getElementById('saveCategoryProduct').getAttribute('data-edit-id');
+            
+            if (!name || !price) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            if (editId) {
+                // Update existing product
+                const index = categoryProductsData.findIndex(p => p.id === parseInt(editId));
+                if (index !== -1) {
+                    categoryProductsData[index].name = name;
+                    categoryProductsData[index].price = `R${price}`;
+                    categoryProductsData[index].subcategoryId = subcategoryId;
+                }
+                document.getElementById('saveCategoryProduct').removeAttribute('data-edit-id');
+            } else {
+                // Add new product
+                const newProduct = {
+                    id: Date.now(),
+                    name: name,
+                    price: `R${price}`,
+                    subcategoryId: subcategoryId
+                };
+                categoryProductsData.push(newProduct);
+            }
+            
+            localStorage.setItem('avonCategoryProducts', JSON.stringify(categoryProductsData));
+            renderCategories();
+            renderAdminLists();
+            resetCategoryProductForm();
+        }
+        
+        function resetCategoryForm() {
+            document.getElementById('categoryName').value = '';
+            document.getElementById('categoryIcon').value = '';
+            document.getElementById('saveCategory').removeAttribute('data-edit-id');
+        }
+        
+        function resetSubcategoryForm() {
+            document.getElementById('subcategoryName').value = '';
+            document.getElementById('subcategoryIcon').value = '';
+            document.getElementById('saveSubcategory').removeAttribute('data-edit-id');
+        }
+        
+        function resetCategoryProductForm() {
+            document.getElementById('productNameCat').value = '';
+            document.getElementById('productPriceCat').value = '';
+            document.getElementById('saveCategoryProduct').removeAttribute('data-edit-id');
+        }
+    </script>
+</body>
+</html>
 
