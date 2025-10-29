@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    
+    <!-- Homepage -->
+    <url>
+        <loc>https://avon-constance-mathibe.co.za/</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://avon-constance-mathibe.co.za/"/>
+    </url>
+    
+    <!-- Products Section -->
+    <url>
+        <loc>https://avon-constance-mathibe.co.za/products/</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://avon-constance-mathibe.co.za/products/"/>
+    </url>
+    
+    <!-- Product Categories -->
+    <url>
+        <loc>https://avon-constance-mathibe.co.za/products/skincare/</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://avon-constance-mathibe.co.za/products/makeup/</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://avon-constance-mathibe.co.za/products/fragrance/</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://avon-constance-mathibe.co.za/products/body-care/</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://avon-constance-mathibe.co.za/products/mens-grooming/</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- Brochures Section -->
+    <url>
+        <loc>https://avon-constance-mathibe.co.za/brochures/</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <!-- Makeup Magic Section -->
+    <url>
+        <loc>https://avon-constance-mathibe.co.za/makeup-magic/</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <!-- Beauty Advice Section -->
+    <url>
+        <loc>https://avon-constance-mathibe.co.za/beauty-advice/</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    
+    <!-- Testimonials Section -->
+    <url>
+        <loc>https://avon-constance-mathibe.co.za/testimonials/</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    
+    <!-- Contact Section -->
+    <url>
+        <loc>https://avon-constance-mathibe.co.za/contact/</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
+    <!-- Login/Register Section -->
+    <url>
+        <loc>https://avon-constance-mathibe.co.za/login/</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+    
+    <url>
+        <loc>https://avon-constance-mathibe.co.za/register/</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+    
+    <!-- Admin Section -->
+    <url>
+        <loc>https://avon-constance-mathibe.co.za/admin/</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.2</priority>
+    </url>
+    
+    <!-- Current Brochures -->
+    <url>
+        <loc>https://avon-constance-mathibe.co.za/brochures/spring-2024/</loc>
+        <lastmod>2024-08-15</lastmod>
+        <changefreq>never</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
+    <url>
+        <loc>https://avon-constance-mathibe.co.za/brochures/summer-special-offers/</loc>
+        <lastmod>2024-07-20</lastmod>
+        <changefreq>never</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
+    <!-- Golden Glow Look -->
+    <url>
+        <loc>https://avon-constance-mathibe.co.za/golden-glow-look/</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+</urlset>
