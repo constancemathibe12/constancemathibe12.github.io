@@ -1,1 +1,3 @@
-https://constancemathibe12.github.io/sitemap.xml
+User-agent: *
+Allow: /
+Sitemap: https://lebohangmalefane12.github.io/sitemap.xml
